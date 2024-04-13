@@ -1,6 +1,6 @@
 {
   "name": "Chan Hua Jian",
-  "location": "Kuala Lumpur, Malaysia",
+  "location": "Petaling Jaya, Malaysia",
   "locationLink": "",
   "quote": "Mobile App Developer, has a strong desire to create applications in the industry. Mechanical keyboards enthusiast.",
   "imageUrl": "",
@@ -79,10 +79,10 @@
   ],
   "skills": [
     "Flutter",
-    "React JS",
     "Swift",
     "Objective-C",
     "Kotlin",
+    "React JS",
     "git",
     "Devops"
   ]
