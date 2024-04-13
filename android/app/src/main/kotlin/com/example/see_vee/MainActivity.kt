@@ -1,4 +1,4 @@
-package com.example.minimalist_cv
+package com.example.see_vee
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:minimalist_cv/app/assets/theme.dart';
-import 'package:minimalist_cv/app/view/home_page.dart';
+import 'package:see_vee/app/assets/theme.dart';
+import 'package:see_vee/app/view/home_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
