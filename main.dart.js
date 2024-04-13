@@ -67257,7 +67257,7 @@ A.eX.prototype={
 uz(){var s=0,r=A.R(t.H),q=this,p
 var $async$uz=A.S(function(a,b){if(a===1)return A.O(b,r)
 while(true)switch(s){case 0:s=2
-return A.W($.Ad().a6_("/data/data.json"),$async$uz)
+return A.W($.Ad().a6_("/assets/data/data.json"),$async$uz)
 case 2:p=b
 if(t.a.b(B.bt.zF(p,null)))q.a=A.anp(B.bt.zF(p,null))
 q.al()
