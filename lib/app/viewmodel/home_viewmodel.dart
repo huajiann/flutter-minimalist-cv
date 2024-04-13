@@ -8,7 +8,7 @@ class HomeViewModel extends ChangeNotifier {
   CvModel? model;
 
   Future<void> loadData() async {
-    final response = await rootBundle.loadString('/data.json');
+    final response = await rootBundle.loadString('/assets/data/data.json');
     if (jsonDecode(response) is Map<String, dynamic>) {
       model = CvModel.fromJson(jsonDecode(response));
     }
