@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:see_vee/app/viewmodel/home_viewmodel.dart';
-import 'package:see_vee/app/widgets/app_badge.dart';
-import 'package:see_vee/app/widgets/app_title.dart';
-import 'package:see_vee/model/cv_model.dart';
+import 'package:jiann_cv/app/viewmodel/home_viewmodel.dart';
+import 'package:jiann_cv/app/widgets/app_badge.dart';
+import 'package:jiann_cv/app/widgets/app_title.dart';
+import 'package:jiann_cv/model/cv_model.dart';
 
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -195,9 +195,7 @@ class _HomePageState extends State<_HomePage> {
         const SizedBox(width: 6),
         Expanded(
           child: Text(
-            location != null && location.isNotEmpty
-                ? location
-                : 'Around the Globe.',
+            location != null && location.isNotEmpty ? location : 'Around the Globe.',
           ),
         ),
       ],
