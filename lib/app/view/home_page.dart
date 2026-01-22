@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:jiann_cv/app/viewmodel/home_viewmodel.dart';
 import 'package:jiann_cv/app/widgets/app_badge.dart';
 import 'package:jiann_cv/app/widgets/app_title.dart';
+import 'package:jiann_cv/app/widgets/print_button.dart';
 import 'package:jiann_cv/model/cv_model.dart';
 
 import 'package:url_launcher/url_launcher_string.dart';
@@ -29,12 +30,20 @@ class _HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<_HomePage> {
+  late final ScrollController _scrollController;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<HomeViewModel>().loadData();
     });
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,26 +54,20 @@ class _HomePageState extends State<_HomePage> {
       final model = viewmodel.model;
       final workExperience = model?.work;
       final education = model?.education;
-      final projects = model?.projects;
+      final projects = model?.projects; // ignore: unused_local_variable
       if (model != null) {
         return SelectionArea(
           child: Scaffold(
-              body: Container(
-            alignment: Alignment.topCenter,
-            child: SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.symmetric(
-                  horizontal: deviceWidth * (deviceWidth >= 800 ? 0.25 : 0.05),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 75),
-                    headerCard(
-                      name: model.name ?? '',
-                      description: model.quote,
-                      location: model.location,
-                      contacts: model.contact,
+            backgroundColor: Colors.white,
+            body: Scrollbar(
+              controller: _scrollController,
+              thumbVisibility: true,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Center(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: (deviceWidth >= 1024 ? 800 : deviceWidth * 0.95),
                     ),
                     const SizedBox(height: 30),
                     aboutMeCard(description: model.aboutMe ?? ''),
@@ -130,7 +133,7 @@ class _HomePageState extends State<_HomePage> {
                 ),
               ),
             ),
-          )),
+          ),
         );
       } else {
         return const SizedBox.shrink();
@@ -178,6 +181,12 @@ class _HomePageState extends State<_HomePage> {
               locationItem(location),
               const SizedBox(height: 12),
               if (contacts != null) contactList(contacts),
+              Row(
+                children: [
+                  const Spacer(),
+                  PrintButton(model: model),
+                ],
+              ),
             ],
           ),
         ),
@@ -187,10 +196,18 @@ class _HomePageState extends State<_HomePage> {
             padding: const EdgeInsets.only(left: 12),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                'assets/images/IMG_1191_1.jpg',
-                width: 120,
-              ),
+              child: Builder(builder: (context) {
+                final dv = MediaQuery.of(context).size.width;
+                final imageMaxWidth = (dv >= 1024 ? 140.0 : dv * 0.18);
+                return ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: imageMaxWidth),
+                  child: Image.asset(
+                    'assets/images/IMG_1191_1.jpg',
+                    width: imageMaxWidth,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              }),
             ),
           ),
         )
@@ -231,6 +248,10 @@ class _HomePageState extends State<_HomePage> {
   }
 
   Widget contactListItem(ContactType type, {String? url}) {
+    final dv = MediaQuery.of(context).size.width;
+    final boxSize = math.max(28.0, math.min(44.0, dv * 0.035));
+    final iconSize = math.max(12.0, boxSize * 0.45);
+
     return Padding(
       padding: const EdgeInsets.only(right: 8),
       child: InkWell(
@@ -241,11 +262,14 @@ class _HomePageState extends State<_HomePage> {
                 break;
               case ContactType.email:
                 launchUrlString('mailto:$url');
+                break;
               case ContactType.phone:
                 launchUrlString('tel:$url');
+                break;
               case ContactType.github:
               case ContactType.twitter:
                 launchUrlString(url);
+                break;
             }
           }
         },
@@ -253,8 +277,8 @@ class _HomePageState extends State<_HomePage> {
           alignment: Alignment.center,
           children: [
             Container(
-              width: 35,
-              height: 35,
+              width: boxSize,
+              height: boxSize,
               decoration: BoxDecoration(
                 border: Border.all(width: 0.5),
                 borderRadius: BorderRadius.circular(8),
@@ -262,7 +286,7 @@ class _HomePageState extends State<_HomePage> {
             ),
             FaIcon(
               type.toGetIcons(),
-              size: 16,
+              size: iconSize,
             ),
           ],
         ),
