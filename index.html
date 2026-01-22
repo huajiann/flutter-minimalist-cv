@@ -18,7 +18,7 @@
 
     <meta charset="UTF-8" />
     <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
-    <meta name="description" content="A new Flutter project." />
+    <meta name="description" content="Jiann Minimalist CV" />
 
     <!-- iOS meta tags & icons -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,42 +31,8 @@
 
     <title>jiann_cv</title>
     <link rel="manifest" href="manifest.json" />
-
-    <script>
-      // The value below is injected by `flutter build`, do not touch.
-      const serviceWorkerVersion = "3490788216";
-    </script>
-    <!-- Flutter initialization JS. Do not modify. -->
-    <script src="flutter.js" defer></script>
   </head>
   <body>
-    <script>
-      // Service worker registration: injected `serviceWorkerVersion` is used by
-      // the build system. Keep this logic as-is.
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("flutter-first-frame", function () {
-          navigator.serviceWorker.register(
-            "flutter_service_worker.js?v=" + serviceWorkerVersion,
-          );
-        });
-      }
-
-      // Load the Flutter engine + app. The `flutter.js` script (above) defines
-      // `_flutter.loader` used here. Do not replace with a direct
-      // `<script src="main.dart.js">` include or move this code before
-      // `flutter.js`.
-      window.addEventListener("load", function (ev) {
-        _flutter.loader
-          .loadEntrypoint({
-            serviceWorker: { serviceWorkerVersion: serviceWorkerVersion },
-          })
-          .then(function (engineInitializer) {
-            return engineInitializer.initializeEngine();
-          })
-          .then(function (appRunner) {
-            appRunner.runApp();
-          });
-      });
-    </script>
+    <script src="flutter_bootstrap.js" async></script>
   </body>
 </html>
