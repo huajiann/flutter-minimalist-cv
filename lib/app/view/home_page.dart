@@ -190,7 +190,7 @@ class _HomePageState extends State<_HomePage> {
       children: [
         const FaIcon(
           FontAwesomeIcons.locationDot,
-          size: 20,
+          size: 16,
         ),
         const SizedBox(width: 6),
         Expanded(
@@ -316,7 +316,7 @@ class _HomePageState extends State<_HomePage> {
         AppTitle(
           title: title,
           fontSize: 16,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w600,
         ),
         const SizedBox(width: 6),
         if (badges != null && badges.isNotEmpty)
@@ -341,7 +341,10 @@ class _HomePageState extends State<_HomePage> {
   Widget experienceItemPosition(String position) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
-      child: Text(position),
+      child: Text(
+        position,
+        style: const TextStyle(fontWeight: FontWeight.w500),
+      ),
     );
   }
 
