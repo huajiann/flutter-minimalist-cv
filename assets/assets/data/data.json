@@ -2,7 +2,7 @@
   "name": "Chan Hua Jian",
   "location": "Petaling Jaya, Malaysia",
   "locationLink": "",
-  "quote": "Mobile App Developer, has a strong desire to create applications in the industry. Mechanical keyboards enthusiast.",
+  "quote": "Your friendly neighborhood software engineer.",
   "imageUrl": "",
   "aboutMe": "As a mobile developer, I have developed several mobile apps, ranging from healthcare to finance. I have been actively participated in the development of Superapps and its miniapps. Currently, my primary focus revolves around on Flutter, Swift and React JS.",
   "contact": [
@@ -25,9 +25,7 @@
   "work": [
     {
       "company": "Agmo Studio",
-      "badges": [
-        "full time"
-      ],
+      "badges": ["full time"],
       "position": "Software Developer",
       "description": "Implemented new features for mobile applications and shipped to App Store/Play Store, integrated python to mobile apps, currently working on Superapp development. Technologies: Flutter, Swift, Kotlin, React JS",
       "startDate": "Jan 2023",
@@ -37,7 +35,7 @@
       "company": "IBM Malaysia Sdn Bhd",
       "badges": [],
       "position": "Web Application Developer Intern",
-      "description": "Created admin portal front-end screens with the team with high performance, security and quality, in charge of mapping multiple APIs data, and managed to give a presentation of the product developed with the team to the key stakeholders from Singapore. Technologies: Low-code platform",
+      "description": "Created admin portal front-end screens with the team with high performance, security and quality, in charge of mapping multiple APIs data, and managed to give a presentation of the product developed with the team to the key stakeholders from Singapore. \nTechnologies: Low-code platform",
       "startDate": "Jan",
       "endDate": "Apr 2022"
     }
@@ -67,13 +65,15 @@
     {
       "title": "Minimalist CV",
       "description": "This CV website which inspired by Bartosz Jarocki.",
-      "badges": ["Flutter",
-      "React JS",
-      "Swift",
-      "Objective-C",
-      "Kotlin",
-      "git",
-      "Devops"],
+      "badges": [
+        "Flutter",
+        "React JS",
+        "Swift",
+        "Objective-C",
+        "Kotlin",
+        "git",
+        "Devops"
+      ],
       "isOngoing": true
     }
   ],
