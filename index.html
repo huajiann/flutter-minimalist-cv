@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <!--
@@ -33,26 +33,39 @@
     <link rel="manifest" href="manifest.json" />
 
     <script>
-      // The value below is injected by flutter build, do not touch.
-      const serviceWorkerVersion = "659664433";
+      // The value below is injected by `flutter build`, do not touch.
+      const serviceWorkerVersion = "3490788216";
     </script>
-    <!-- This script adds the flutter initialization JS code -->
+    <!-- Flutter initialization JS. Do not modify. -->
     <script src="flutter.js" defer></script>
   </head>
   <body>
     <script>
-      window.addEventListener("load", function (ev) {
-        // Download main.dart.js
-        _flutter.loader.loadEntrypoint({
-          serviceWorker: {
-            serviceWorkerVersion: serviceWorkerVersion,
-          },
-          onEntrypointLoaded: function (engineInitializer) {
-            engineInitializer.initializeEngine().then(function (appRunner) {
-              appRunner.runApp();
-            });
-          },
+      // Service worker registration: injected `serviceWorkerVersion` is used by
+      // the build system. Keep this logic as-is.
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("flutter-first-frame", function () {
+          navigator.serviceWorker.register(
+            "flutter_service_worker.js?v=" + serviceWorkerVersion,
+          );
         });
+      }
+
+      // Load the Flutter engine + app. The `flutter.js` script (above) defines
+      // `_flutter.loader` used here. Do not replace with a direct
+      // `<script src="main.dart.js">` include or move this code before
+      // `flutter.js`.
+      window.addEventListener("load", function (ev) {
+        _flutter.loader
+          .loadEntrypoint({
+            serviceWorker: { serviceWorkerVersion: serviceWorkerVersion },
+          })
+          .then(function (engineInitializer) {
+            return engineInitializer.initializeEngine();
+          })
+          .then(function (appRunner) {
+            appRunner.runApp();
+          });
       });
     </script>
   </body>
