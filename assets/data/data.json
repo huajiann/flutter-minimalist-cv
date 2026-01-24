@@ -29,7 +29,7 @@
       "position": "Software Developer",
       "description": "Implemented new features for mobile applications and shipped to App Store/Play Store, integrated python to mobile apps, currently working on Superapp development. Technologies: Flutter, Swift, Kotlin, React JS",
       "startDate": "Jan 2023",
-      "endDate": "Present"
+      "endDate": "Dec 2025"
     },
     {
       "company": "IBM Malaysia Sdn Bhd",
@@ -52,29 +52,17 @@
   "projects": [
     {
       "title": "Minimalist CV",
-      "description": "This CV website which inspired by Bartosz Jarocki.",
-      "badges": [],
-      "isOngoing": true
+      "description": "This CV website built with Flutter which inspired by Bartosz Jarocki.",
+      "badges": ["Flutter", "Dart"],
+      "isOngoing": true,
+      "link": null
     },
     {
-      "title": "Minimalist CV",
-      "description": "This CV website which inspired by Bartosz Jarocki.",
-      "badges": [],
-      "isOngoing": true
-    },
-    {
-      "title": "Minimalist CV",
-      "description": "This CV website which inspired by Bartosz Jarocki.",
-      "badges": [
-        "Flutter",
-        "React JS",
-        "Swift",
-        "Objective-C",
-        "Kotlin",
-        "git",
-        "Devops"
-      ],
-      "isOngoing": true
+      "title": "Malaysia Petrol Price Monitoring",
+      "description": "A simple Flutter web application that monitors petrol prices in Malaysia.",
+      "badges": ["Flutter", "Dart", "NodeJS", "Firebase"],
+      "isOngoing": true,
+      "link": "https://huajiann.github.io/my_petrol_monitoring/"
     }
   ],
   "skills": [

@@ -32,24 +32,12 @@ class CvModel {
         quote: json["quote"],
         imageUrl: json["imageUrl"],
         aboutMe: json["aboutMe"],
-        contact: json["contact"] == null
-            ? []
-            : List<Contact>.from(
-                json["contact"]!.map((x) => Contact.fromJson(x))),
-        work: json["work"] == null
-            ? []
-            : List<Work>.from(json["work"]!.map((x) => Work.fromJson(x))),
-        education: json["education"] == null
-            ? []
-            : List<Education>.from(
-                json["education"]!.map((x) => Education.fromJson(x))),
-        projects: json["projects"] == null
-            ? []
-            : List<Project>.from(
-                json["projects"]!.map((x) => Project.fromJson(x))),
-        skills: json["skills"] == null
-            ? []
-            : List<String>.from(json["skills"]!.map((x) => x)),
+        contact: json["contact"] == null ? [] : List<Contact>.from(json["contact"]!.map((x) => Contact.fromJson(x))),
+        work: json["work"] == null ? [] : List<Work>.from(json["work"]!.map((x) => Work.fromJson(x))),
+        education:
+            json["education"] == null ? [] : List<Education>.from(json["education"]!.map((x) => Education.fromJson(x))),
+        projects: json["projects"] == null ? [] : List<Project>.from(json["projects"]!.map((x) => Project.fromJson(x))),
+        skills: json["skills"] == null ? [] : List<String>.from(json["skills"]!.map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,20 +47,11 @@ class CvModel {
         "quote": quote,
         "imageUrl": imageUrl,
         "aboutMe": aboutMe,
-        "contact": contact == null
-            ? []
-            : List<dynamic>.from(contact!.map((x) => x.toJson())),
-        "work": work == null
-            ? []
-            : List<dynamic>.from(work!.map((x) => x.toJson())),
-        "education": education == null
-            ? []
-            : List<dynamic>.from(education!.map((x) => x.toJson())),
-        "projects": projects == null
-            ? []
-            : List<dynamic>.from(projects!.map((x) => x.toJson())),
-        "skills":
-            skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
+        "contact": contact == null ? [] : List<dynamic>.from(contact!.map((x) => x.toJson())),
+        "work": work == null ? [] : List<dynamic>.from(work!.map((x) => x.toJson())),
+        "education": education == null ? [] : List<dynamic>.from(education!.map((x) => x.toJson())),
+        "projects": projects == null ? [] : List<dynamic>.from(projects!.map((x) => x.toJson())),
+        "skills": skills == null ? [] : List<dynamic>.from(skills!.map((x) => x)),
       };
 }
 
@@ -137,29 +116,30 @@ class Project {
   final String? description;
   final List<String>? badges;
   final bool? isOngoing;
+  final String? link;
 
   Project({
     this.title,
     this.description,
     this.badges,
     this.isOngoing,
+    this.link,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) => Project(
         title: json["title"],
         description: json["description"],
-        badges: json["badges"] == null
-            ? []
-            : List<String>.from(json["badges"]!.map((x) => x)),
+        badges: json["badges"] == null ? [] : List<String>.from(json["badges"]!.map((x) => x)),
         isOngoing: json["isOngoing"],
+        link: json["link"],
       );
 
   Map<String, dynamic> toJson() => {
         "title": title,
         "description": description,
-        "badges":
-            badges == null ? [] : List<dynamic>.from(badges!.map((x) => x)),
+        "badges": badges == null ? [] : List<dynamic>.from(badges!.map((x) => x)),
         "isOngoing": isOngoing,
+        "link": link,
       };
 }
 
@@ -182,9 +162,7 @@ class Work {
 
   factory Work.fromJson(Map<String, dynamic> json) => Work(
         company: json["company"],
-        badges: json["badges"] == null
-            ? []
-            : List<String>.from(json["badges"]!.map((x) => x)),
+        badges: json["badges"] == null ? [] : List<String>.from(json["badges"]!.map((x) => x)),
         position: json["position"],
         description: json["description"],
         startDate: json["startDate"],
@@ -193,8 +171,7 @@ class Work {
 
   Map<String, dynamic> toJson() => {
         "company": company,
-        "badges":
-            badges == null ? [] : List<dynamic>.from(badges!.map((x) => x)),
+        "badges": badges == null ? [] : List<dynamic>.from(badges!.map((x) => x)),
         "position": position,
         "description": description,
         "startDate": startDate,

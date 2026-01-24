@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:jiann_cv/app/viewmodel/home_viewmodel.dart';
@@ -97,26 +98,33 @@ class _HomePageState extends State<_HomePage> {
                     const SizedBox(height: 30),
                     if (model.skills != null) skillsCard(model.skills!),
                     const SizedBox(height: 30),
-                    // if (projects != null)
-                    //   GridView.builder(
-                    //     shrinkWrap: true,
-                    //     physics: const NeverScrollableScrollPhysics(),
-                    //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //       crossAxisCount: _calculateCrossAxisCount(context),
-                    //       crossAxisSpacing: 10,
-                    //       mainAxisSpacing: 10,
-                    //       // childAspectRatio: 4 / 3,
-                    //     ),
-                    //     itemCount: projects.length,
-                    //     itemBuilder: (context, index) {
-                    //       final project = projects[index];
-                    //       return projectCard(
-                    //         title: project.title ?? '',
-                    //         description: project.description ?? '',
-                    //         techStack: project.badges ?? [],
-                    //       );
-                    //     },
-                    //   ),
+                    if (projects != null) ...[
+                      const AppTitle(title: 'Projects'),
+                      const SizedBox(height: 14),
+                      LayoutGrid(
+                        columnSizes: _getResponsiveColumnSizes(context),
+                        rowSizes: List.filled(
+                          (projects.length / (_getResponsiveGridConfig(context)['columns'] as int)).ceil(),
+                          auto,
+                        ),
+                        columnGap: _getResponsiveGridConfig(context)['gap'] as double,
+                        rowGap: _getResponsiveGridConfig(context)['gap'] as double,
+                        children: List.generate(
+                          projects.length,
+                          (index) {
+                            final project = projects[index];
+                            return GridPlacement(
+                              child: projectCard(
+                                title: project.title ?? '',
+                                description: project.description ?? '',
+                                techStack: project.badges ?? [],
+                                link: project.link,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 30),
                   ],
                 ),
@@ -130,15 +138,20 @@ class _HomePageState extends State<_HomePage> {
     });
   }
 
-  int _calculateCrossAxisCount(BuildContext context) {
+  Map<String, dynamic> _getResponsiveGridConfig(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
     if (deviceWidth >= 1024) {
-      return 3;
+      return {'columns': 3, 'gap': 20.0};
     } else if (deviceWidth >= 768) {
-      return 2;
+      return {'columns': 2, 'gap': 12.0};
     } else {
-      return 1;
+      return {'columns': 1, 'gap': 6.0};
     }
+  }
+
+  List<TrackSize> _getResponsiveColumnSizes(BuildContext context) {
+    int columns = _getResponsiveGridConfig(context)['columns'] as int;
+    return List.filled(columns, 1.fr);
   }
 
   Widget headerCard({
@@ -375,27 +388,56 @@ Widget projectCard({
   required String title,
   required String description,
   List<String>? techStack,
+  String? link,
 }) {
-  return Container(
-    color: Colors.amber,
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppTitle(
-            title: title,
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
+  final borderRadius = BorderRadius.circular(16);
+
+  return Material(
+    color: Colors.transparent,
+    borderRadius: borderRadius,
+    clipBehavior: Clip.antiAlias,
+    child: InkWell(
+      borderRadius: borderRadius,
+      onTap: () {
+        if (link != null && link.isNotEmpty) {
+          launchUrlString(link);
+        }
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 0.5, color: Colors.grey),
+          borderRadius: borderRadius,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AppTitle(
+                title: title,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                description,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const Spacer(),
+              if (techStack != null && techStack.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 10,
+                  children: techStack.map((tech) => AppBadge(title: tech)).toList(),
+                )
+              ],
+            ],
           ),
-          Text(
-            description,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
+        ),
       ),
     ),
   );
