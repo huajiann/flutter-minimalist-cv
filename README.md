@@ -1,13 +1,13 @@
 # Minimalist CV with Flutter
 
-This is a simple Flutter Web app which was inspired by Bartosz Jarocki.
+A simple Flutter Web app to create your own online CV/resume, inspired by Bartosz Jarocki's minimalist design.
 
-# Features
+## Features
 
-- Setup with only one file.
-- Built with Flutter, hosted with Github Pages via [peanut](https://pub.dev/packages/peanut)
-- Auto generated layout.
-- Responsive with any devices (should be!)
+- Setup with only one file (`assets/data/data.json`)
+- Built with Flutter, easily hosted with GitHub Pages
+- Auto-generated responsive layout
+- Works on any device
 
 ## Tech Stack
 
@@ -15,77 +15,155 @@ This is a simple Flutter Web app which was inspired by Bartosz Jarocki.
 - **Dart:** 3.9.x (tested on 3.9.2)
 - **Target platform:** Web (Chrome)
 
-Minimum requirement: Flutter SDK >= 3.35.0. If your local SDK is older, upgrade Flutter before running the project.
+**Minimum requirement:** Flutter SDK >= 3.35.0. If your local SDK is older, upgrade Flutter before running the project.
 
-## Run Locally
+> **💡 Tip:** If you work with multiple Flutter projects requiring different versions, consider using [FVM (Flutter Version Management)](https://fvm.app/). It allows you to easily switch between Flutter versions per project without conflicts.
+>
+> Quick FVM setup:
+>
+> ```bash
+> # Install FVM
+> dart pub global activate fvm
+>
+> # Use specific Flutter version for this project
+> fvm use 3.35.5
+>
+> # Run commands with FVM
+> fvm flutter pub get
+> fvm flutter run -d chrome
+> ```
 
-Quick steps to clone and run this project on your machine:
+## Getting Started
+
+### 1. Fork the Repository
+
+1. Go to https://github.com/huajiann/flutter-minimalist-cv
+2. Click the **Fork** button in the top-right corner
+3. This creates a copy of the repository in your GitHub account
+
+### 2. Clone Your Fork
 
 ```bash
-# clone the repo
-git clone https://github.com/huajiann/flutter-minimalist-cv.git
+# Replace YOUR_USERNAME with your GitHub username
+git clone https://github.com/YOUR_USERNAME/flutter-minimalist-cv.git
 cd flutter-minimalist-cv
+```
 
-# install dependencies
+### 3. Customize Your CV
+
+Edit the file `assets/data/data.json` with your information:
+
+```json
+{
+  "name": "Your Name",
+  "location": "Your City, Country",
+  "locationLink": "",
+  "quote": "Your professional tagline",
+  "imageUrl": "",
+  "aboutMe": "Your bio/summary",
+  "contact": [
+    {
+      "id": 1,
+      "name": "email",
+      "url": "your.email@example.com"
+    },
+    {
+      "id": 2,
+      "name": "github",
+      "url": "https://github.com/YOUR_USERNAME"
+    }
+  ],
+  "work": [...],
+  "education": [...],
+  "skills": [...],
+  "projects": [...]
+}
+```
+
+**Optional:** Add profile images and other assets:
+
+- Place images in `assets/images/`
+- Update `imageUrl` in `data.json` to reference your image (e.g., `"assets/images/profile.jpg"`)
+- Remember to register any new assets in `pubspec.yaml` under the `assets:` section
+
+### 4. Install Dependencies
+
+Make sure you have Flutter installed. See https://docs.flutter.dev/get-started/install if needed.
+
+```bash
 flutter pub get
+```
 
-# run on Chrome (dev)
+### 5. Run Locally
+
+Test your CV locally before deploying:
+
+```bash
+# Run in Chrome
 flutter run -d chrome
-
-# or build the web release (then deploy or serve locally)
-flutter build web --release --base-href /flutter-minimalist-cv/
 ```
 
-Notes:
+**Note:** Use an incognito window or clear your browser cache to see latest changes after rebuilding.
 
-- Make sure you have Flutter installed and on your PATH. See https://docs.flutter.dev/get-started/install.
-- Use an incognito window or unregister the service worker after a deploy to avoid cached assets during testing.
+## Deploy to GitHub Pages
 
-## Build & Deploy (GitHub Pages)
+### Option A: Using `peanut` (Recommended)
 
-To build the web app for GitHub Pages and ensure scripts load correctly, set the `--base-href` to your repository path. Example for this repo (served at `https://huajiann.github.io/flutter-minimalist-cv/`):
+This tool automates the deployment process:
 
 ```bash
-cd C:\Playground\Github\cv
-flutter build web --release --base-href /flutter-minimalist-cv/
+# Install peanut (one-time setup)
+flutter pub global activate peanut
+
+# Deploy to GitHub Pages
+# Replace YOUR_REPO_NAME with your repository name (e.g., flutter-minimalist-cv)
+flutter pub global run peanut --extra-args "--base-href /YOUR_REPO_NAME/"
+
+# Push the gh-pages branch
+git push origin gh-pages
 ```
 
-Then deploy the `build/web` contents to the `gh-pages` branch. A minimal sequence:
+### Option B: Manual Deployment
 
 ```bash
+# Replace YOUR_REPO_NAME with your repository name
+flutter build web --release --base-href /YOUR_REPO_NAME/
+
+# Navigate to build output
 cd build/web
+
+# Initialize git and deploy
 git init
-git remote add origin https://github.com/huajiann/flutter-minimalist-cv.git
+git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 git checkout -b gh-pages
 git add .
-git commit -m "Deploy site"
+git commit -m "Deploy CV site"
 git push -f origin gh-pages
 ```
 
-Notes:
+### Enable GitHub Pages
 
-- If you host at the user site (`username.github.io`) use `--base-href /` instead.
-- After deployment, clear or unregister the service worker in DevTools (Application → Service Workers → Unregister) or open the site in an incognito window to avoid stale cached assets.
-- Do not manually edit the generated `build/web/index.html`; use `--base-href` to inject the correct base path.
+1. Go to your repository on GitHub
+2. Navigate to **Settings** → **Pages**
+3. Under "Source", select the `gh-pages` branch
+4. Click **Save**
+5. Your CV will be live at: `https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/`
 
-If you'd like, I can add a small deploy script to automate this.
+**Note:** If you're hosting at `YOUR_USERNAME.github.io` (user site), use `--base-href /` instead.
 
-### Deploy using `peanut` (recommended)
+## Tips & Troubleshooting
 
-If you prefer `peanut` to handle deploying, run:
+- **Cached assets:** After deployment, clear browser cache or use incognito mode to see the latest changes. You can also unregister the service worker in DevTools (Application → Service Workers → Unregister).
+- **Base href:** Always use `--base-href /YOUR_REPO_NAME/` to ensure scripts and assets load correctly.
+- **Data structure:** Check the existing `data.json` for the complete structure including `work`, `education`, `skills`, and `projects` arrays.
 
-```bash
-# install peanut if you haven't already
-flutter pub global activate peanut
+## Updating Your CV
 
-cd C:\Playground\Github\cv
-flutter pub global run peanut --extra-args "--base-href /flutter-minimalist-cv/"
-```
+1. Edit `assets/data/data.json` with your new information
+2. Test locally: `flutter run -d chrome`
+3. Redeploy using `peanut` or manual build
+4. Push to `gh-pages` branch
 
-After `peanut` runs you can push the `gh-pages` branch (if needed):
+---
 
-```bash
-git push origin --set-upstream gh-pages
-```
-
-This sequence keeps the `--base-href` consistent and avoids manual edits to `index.html`.
+Inspired by [Bartosz Jarocki's CV](https://github.com/BartoszJarocki/cv)
